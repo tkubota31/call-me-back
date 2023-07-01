@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+
+import Homepage from "./pages/Homepage"
+import Registration from "./pages/Registration"
+import Login from "./pages/Login"
+import {FDA} from "./api"
 
 function App() {
+  const[currentUser, setCurrentUser] = useState(null)
+
+  async function register(data : any){
+    console.log("Register function", data)
+      FDA.register(data)
+  }
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Homepage name="Taioh"/>
+      <Registration register={register} />
+      <Login />
     </div>
   );
 }
