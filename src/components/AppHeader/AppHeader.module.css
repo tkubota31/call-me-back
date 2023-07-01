@@ -1,0 +1,59 @@
+.drawer {
+    position: absolute;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    right: 0;
+}
+
+.isClosed {
+    display: none;
+}
+
+.hamburger {
+    padding: 12px;
+    line-height: 50px;
+    vertical-align: middle;
+    margin-left: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1124px;
+    margin: auto;
+}
+
+
+@media (max-width: 720px) {
+    .logo {
+        margin-left: auto;
+    }
+}
+
+.logo {
+    padding: 12px;
+}
+
+.overlay {
+    background: #000000ad;
+    position: absolute;
+    width: 100vh;
+    height: 100vh;
+}
+
+.navOption {
+    padding: 12px;
+    line-height:50px;
+    vertical-align: middle;
+}
+
+li.navOption {
+    list-style:none;
+    text-align:end;
+    padding: 0px 24px;
+}
+
+.navOptions {
+    display: flex;
+}
