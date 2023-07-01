@@ -1,46 +1,59 @@
 import React, {useState} from "react"
+import {FDA} from "../api"
 
-type User = {
+export type User = {
   email: string;
-  phone: string;
-  preference: string[];
+  phoneNumber: string;
+  typesPref: string[];
 }
 
-type RegistrationProps= {
-  register: (user: string) => {};
-}
-
-export default function Registration({register}: RegistrationProps){
+export default function Registration(){
     const defaultData: User = {
         email: "",
-        phone: "",
-        preference: []
-
+        phoneNumber: "",
+        typesPref: []
     }
 
     const[formData, setFormData] = useState(defaultData)
 
+    async function register(data: any){
+      FDA.register(data)
+    }
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
-        setFormData((prevState) =>({
-            ...prevState,
-            [e.target.id]: e.target.value,
+      const selectedPreferences: string[] = [];
+      const checkboxes = document.querySelectorAll('input[name="preference"]:checked') as NodeListOf<HTMLInputElement>;
+      console.log(checkboxes)
+
+      for (const checkbox of checkboxes) {
+        selectedPreferences.push(checkbox.value)
+
+      }
+
+        setFormData((formData: User) =>({
+            ...formData,
+            [e.target.name]: e.target.value,
         }));
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const selectedPreferences: string[] = [];
-        const checkboxes = document.querySelectorAll('input[name="preference"]:checked');
-        console.log(checkboxes)
-        // checkboxes.forEach((checkbox) => {
-        //     selectedPreferences.push(checkbox);
-        // });
+        // const selectedPreferences: string[] = [];
+        // const checkboxes = document.querySelectorAll('input[name="preference"]:checked') as NodeListOf<HTMLInputElement>;
+        // console.log(checkboxes)
 
-        setFormData((prevState: User) => ({
-            ...prevState,
-            preference: selectedPreferences
-        }))
+        // for (const checkbox of checkboxes) {
+        //   selectedPreferences.push(checkbox.value)
+
+        // }
+
+        // setFormData((formData: User) => ({
+        //     ...formData,
+        //     preference: [...selectedPreferences]
+        // }))
+
+        // console.log(formData)
 
         register(formData)
         setFormData(defaultData);
@@ -51,10 +64,10 @@ export default function Registration({register}: RegistrationProps){
         <h1>Registration Form</h1>
         <form onSubmit={onSubmit}>
             <label htmlFor="email">Email:</label>
-            <input value={formData.email} type="text" id="email" onChange={onChange} />
+            <input value={formData.email} name="email" type="text" id="email" onChange={onChange} />
 
             <label htmlFor="phone">Phone Number:</label>
-            <input value={formData.phone} type="text" id="phone" onChange={onChange} />
+            <input value={formData.phoneNumber} name= "phone" type="text" id="phone" onChange={onChange} />
 
             <label htmlFor ="preference">Food</label>
             <input value="food" name = "preference" type ="checkbox" id="food" onChange={onChange}></input>
