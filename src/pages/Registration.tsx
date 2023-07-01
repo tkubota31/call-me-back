@@ -22,41 +22,26 @@ export default function Registration(){
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
       const selectedPreferences: string[] = [];
-      const checkboxes = document.querySelectorAll('input[name="preference"]:checked') as NodeListOf<HTMLInputElement>;
-      console.log(checkboxes)
+      const checkboxes = document.querySelectorAll('input[name="typesPref"]:checked') as NodeListOf<HTMLInputElement>;
+
 
       for (const checkbox of checkboxes) {
         selectedPreferences.push(checkbox.value)
-
       }
 
-        setFormData((formData: User) =>({
-            ...formData,
-            [e.target.name]: e.target.value,
-        }));
+      setFormData((formData: User) =>({
+          ...formData,
+          [e.target.name]: e.target.value,
+          typesPref: [...selectedPreferences]
+      }));
+
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        // const selectedPreferences: string[] = [];
-        // const checkboxes = document.querySelectorAll('input[name="preference"]:checked') as NodeListOf<HTMLInputElement>;
-        // console.log(checkboxes)
-
-        // for (const checkbox of checkboxes) {
-        //   selectedPreferences.push(checkbox.value)
-
-        // }
-
-        // setFormData((formData: User) => ({
-        //     ...formData,
-        //     preference: [...selectedPreferences]
-        // }))
-
-        // console.log(formData)
-
         register(formData)
         setFormData(defaultData);
+
       };
 
     return (
@@ -66,17 +51,17 @@ export default function Registration(){
             <label htmlFor="email">Email:</label>
             <input value={formData.email} name="email" type="text" id="email" onChange={onChange} />
 
-            <label htmlFor="phone">Phone Number:</label>
-            <input value={formData.phoneNumber} name= "phone" type="text" id="phone" onChange={onChange} />
+            <label htmlFor="phoneNumber">Phone Number:</label>
+            <input value={formData.phoneNumber} name= "phoneNumber" type="text" id="phoneNumber" onChange={onChange} />
 
-            <label htmlFor ="preference">Food</label>
-            <input value="food" name = "preference" type ="checkbox" id="food" onChange={onChange}></input>
+            <label htmlFor ="typesPref">Food</label>
+            <input value="food" name = "typesPref" type ="checkbox" id="food" onChange={onChange}></input>
 
-            <label htmlFor ="preference">Drug</label>
-            <input value="drug" name= "preference" type ="checkbox" id="drug" onChange={onChange}></input>
+            <label htmlFor ="typesPref">Drug</label>
+            <input value="drug" name= "typesPref" type ="checkbox" id="drug" onChange={onChange}></input>
 
-            <label htmlFor ="preference">No Preference</label>
-            <input value="no-preference" name= "preference" type ="checkbox" id="no-preference" onChange={onChange}></input>
+            <label htmlFor ="typesPref">No Preference</label>
+            <input value="no-preference" name= "typesPref" type ="checkbox" id="no-preference" onChange={onChange}></input>
 
             <button type="submit"> Subscribe! </button>
         </form>
