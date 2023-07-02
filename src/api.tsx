@@ -10,5 +10,9 @@ export class FDA{
         return response.data
     }
 
+    static async getReport(){
+        let response = await axios.get(`${BASE_URL}/food`)
+        return response.data
+    }
 
 }
