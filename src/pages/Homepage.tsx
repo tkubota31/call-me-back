@@ -9,5 +9,10 @@ export default function Homepage({name}: homeProps){
     <div>
       <h1>{name}</h1>
     </div>
+    // Quick about us
+    // Most recent news
+    // Sign up now
+    // Testimonies
+    //
   );
 };
